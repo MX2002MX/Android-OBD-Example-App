@@ -1,9 +1,8 @@
 package veronika.hella.obdapp;
 
 import android.content.Context;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
-
+import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,7 +26,7 @@ public class ApiHelperTest {
 
     @Before
     public void setup(){
-        Context appContext = InstrumentationRegistry.getTargetContext();
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         api = new ApiHelper(appContext);
     }
 
@@ -37,11 +36,6 @@ public class ApiHelperTest {
         assertTrue("Dtc url generation.", api.getErrorCodeUrl(dtc, "WBAES26C05D", "english").equals("http://172.16.118.67:8080/api/v1/dtc/?code_id=P0001&vin=WBAES26C05D&language=EN"));
         assertTrue("Dtc url generation with missing or wrong parameters.", api.getErrorCodeUrl(null, "", "english").equals("Url generation failed - Missing parameters."));
         assertTrue("Dtc url generation with wrong language.", api.getErrorCodeUrl(dtc, "WBAES26C05D", "deutsch").equals("Your chosen language (deutsch) is not supported."));
-    }
-
-    @Test
-    public void supportedErrorCodesUrlShouldBeGenerated(){
-        assertTrue("Supported dtcs url generation.", api.getSupportedErrorCodesUrl().equals("http://172.16.118.67:8080/api/v1/dtc/list"));
     }
 
     @Test

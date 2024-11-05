@@ -2,22 +2,23 @@
 
 buildscript {
     repositories {
-        jcenter()
+        google() // Google Maven repository
+        mavenCentral() // Maven Central repository
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:+'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath 'com.android.tools.build:gradle:8.1.1' // Updated to the latest version of the Android Gradle Plugin
+        // Remove the bintray plugin as it is deprecated
+        // classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0' // Removed this line
     }
 }
 
 allprojects {
     repositories {
-        jcenter()
+        google() // Use Google Maven repository for dependencies
+        mavenCentral() // Use Maven Central for additional dependencies
     }
 }
 
 task clean(type: Delete) {
-    delete rootProject.buildDir
+    delete rootProject.buildDir // Task to clean build directory
 }
